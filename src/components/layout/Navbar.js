@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 
 const Navbar = ({ iconGlobe, iconInfo, title }) => {
   return (
-    <nav className="navbar bg-primary">
+    <nav className="navbar bg-primary text-center">
       <h1><i className={iconGlobe} /><i className={iconInfo} /> {title}</h1>
-      <ul>
-        <li className="">
-          <Link to='/'>Home</Link>
+      <ul className="list-unstyled">
+        <li className="d-inline">
+          <Link className="text-dark pr-2" to='/'>Home</Link>
         </li>
-        <li>
-          <Link to='/about'>About</Link>
+        <li className="d-inline">
+          <Link className="text-dark" to='/about'>About</Link>
         </li>
       </ul>
     </nav>
