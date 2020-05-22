@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 
-const CurrentWeather = (props) => {
-  const { id, name, weather } = props.city;
+const CurrentWeather = ({ city: { id, name, weather } }) => {
   return (
     <Fragment>
       <div className="card">
@@ -13,6 +13,10 @@ const CurrentWeather = (props) => {
       <br />
     </Fragment>
   );
+};
+
+CurrentWeather.propTypes = {
+  city: PropTypes.object.isRequired,
 };
 
 export default CurrentWeather;
