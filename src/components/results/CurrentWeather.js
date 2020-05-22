@@ -11,6 +11,7 @@ const CurrentWeather = ({ city: { id, name, weather } }) => {
         <div className="card-body">{weather[0].description}</div>
       </div>
       <br />
+      <br />
     </Fragment>
   );
 };
