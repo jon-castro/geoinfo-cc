@@ -1,18 +1,58 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 
-const Search = ({ searchCities, showClear, clearCities, citiesList }) => {
-  const [query, setQuery] = useState('');
+const Search = () => {
+  const [address, setAddress] = useState("");
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 
-  return <div></div>;
-};
+  const handleSelect = async (value) => {
+    const results = await geocodeByAddress(value);
+    const latLng = await getLatLng(results[0]);
+    setAddress(value);
+    setCoordinates(latLng);
+  };
 
-Search.propTypes = {
-  searchCities: PropTypes.func.isRequired,
-  citiesList: PropTypes.array.isRequired,
-  clearCities: PropTypes.func.isRequired,
-  showClear: PropTypes.bool.isRequired,
-  setAlert: PropTypes.func.isRequired,
+  return (
+    <Fragment>
+      <PlacesAutocomplete
+        value={address}
+        onChange={setAddress}
+        onSelect={handleSelect}
+      >
+        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+          <div>
+            <p>Latitude: {coordinates.lat}</p>
+            <p>Longitude: {coordinates.lng}</p>
+
+            <input {...getInputProps({ placeholder: "Type location" })} />
+
+            <div>
+              {loading ? <div>Loading...</div> : null}
+
+              {suggestions.map((suggestion) => {
+                const style = {
+                  backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
+                };
+
+                return (
+                  <div
+                    {...getSuggestionItemProps(suggestion, { style })}
+                    key={suggestion.id}
+                  >
+                    {suggestion.description}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </PlacesAutocomplete>
+    </Fragment>
+  );
 };
 
 export default Search;
