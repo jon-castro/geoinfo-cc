@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from "react";
-import PropTypes from "prop-types";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -25,9 +24,6 @@ const Search = () => {
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
-            <p>Latitude: {coordinates.lat}</p>
-            <p>Longitude: {coordinates.lng}</p>
-
             <input {...getInputProps({ placeholder: "Type location" })} />
 
             <div>
@@ -47,6 +43,9 @@ const Search = () => {
                   </div>
                 );
               })}
+              <br/>
+              <p>Latitude: {coordinates.lat}</p>
+              <p>Longitude: {coordinates.lng}</p>
             </div>
           </div>
         )}
