@@ -5,7 +5,7 @@ import Results from "../results/Results";
 const Home = () => {
   return (
     <Fragment>
-      <h1 className="text-center">Home page.</h1>
+      <h6 className="text-center pt-3">Enter a location on the field below and select from the options or press Enter on your keyboard.</h6>
       <br />
       <div className="text-center">
         <Search />
