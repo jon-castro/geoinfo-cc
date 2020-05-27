@@ -5,7 +5,7 @@ import Results from "../results/Results";
 const Home = () => {
   return (
     <Fragment>
-      <h6 className="text-center pt-3">Enter a location on the field below and select from the options or press Enter on your keyboard.</h6>
+      <p className="text-center pt-3">Enter a location you want to know more about or start typing and select an option from the suggestions:</p>
       <br />
       <div className="text-center">
         <Search />

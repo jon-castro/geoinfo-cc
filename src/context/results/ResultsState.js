@@ -2,11 +2,11 @@ import React, { useReducer } from "react";
 import axios from "axios";
 import ResultsContext from "./resultsContext";
 import ResultsReducer from "./resultsReducer";
-import { GET_SELECTED_LOCATION, GET_COORDINATES, SET_LOADING } from "../types";
+import { SET_ADDRESS, SET_COORDINATES, SET_LOADING } from "../types";
 
 const ResultsState = (props) => {
   const initialState = {
-    selectedLocation: "",
+    address: "",
     coordinates: {
       lat: null,
       lng: null,
@@ -16,9 +16,21 @@ const ResultsState = (props) => {
 
   const [state, dispatch] = useReducer(ResultsReducer, initialState);
 
-  // Get the user selected location
+  //Get selected location from the PlacesAutocomplete component:
+  const setAddress = (value) => {
+    dispatch({
+      type: SET_ADDRESS,
+      payload: value,
+    });
+  };
 
-  // Get results coordinates to reuse on other components
+  //Set coordinates from the selected location:
+  const setCoordinates = (value) => {
+    dispatch({
+      type: SET_COORDINATES,
+      payload: value,
+    });
+  };
 
   // Clear field (use in conjunction with a Search clear function?)
 
@@ -27,9 +39,11 @@ const ResultsState = (props) => {
   return (
     <ResultsContext.Provider
       value={{
-        selectedLocation: state.selectedLocation,
+        address: state.address,
         coordinates: state.coordinates,
-        loading: false,
+        loading: state.loading,
+        setAddress,
+        setCoordinates,
       }}
     >
       {props.children}

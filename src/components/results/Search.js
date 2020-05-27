@@ -1,12 +1,14 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext } from "react";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
 
+import ResultsContext from "../../context/results/resultsContext";
+
 const Search = () => {
-  const [address, setAddress] = useState("");
-  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+  const resultsContext = useContext(ResultsContext);
+  const { address, setAddress, coordinates, setCoordinates } = resultsContext;
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
@@ -43,7 +45,7 @@ const Search = () => {
                   </div>
                 );
               })}
-              <br/>
+              <br />
               <p>Latitude: {coordinates.lat}</p>
               <p>Longitude: {coordinates.lng}</p>
             </div>
