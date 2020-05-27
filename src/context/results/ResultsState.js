@@ -2,11 +2,11 @@ import React, { useReducer } from "react";
 import axios from "axios";
 import ResultsContext from "./resultsContext";
 import ResultsReducer from "./resultsReducer";
-import { SEARCH_LOCATION, GET_COORDINATES, SET_LOADING } from "../types";
+import { GET_SELECTED_LOCATION, GET_COORDINATES, SET_LOADING } from "../types";
 
 const ResultsState = (props) => {
   const initialState = {
-    address: "",
+    selectedLocation: "",
     coordinates: {
       lat: null,
       lng: null,
@@ -16,18 +16,18 @@ const ResultsState = (props) => {
 
   const [state, dispatch] = useReducer(ResultsReducer, initialState);
 
-  // Value of the searched location and coordinates
+  // Get the user selected location
 
-  // Get coordinates
+  // Get results coordinates to reuse on other components
 
-  // Clear field
+  // Clear field (use in conjunction with a Search clear function?)
 
-  // Set loading
+  // Set loading (component loading, separate from the search dropdown "Loading...")
 
   return (
     <ResultsContext.Provider
       value={{
-        address: state.address,
+        selectedLocation: state.selectedLocation,
         coordinates: state.coordinates,
         loading: false,
       }}
