@@ -1,3 +1,4 @@
 export const SET_ADDRESS = "SET_ADDRESS";
 export const SET_COORDINATES = "SET_COORDINATES";
 export const SET_LOADING = "SET_LOADING";
+export const GET_CURRENT_WEATHER = "GET_CURRENT_WEATHER";

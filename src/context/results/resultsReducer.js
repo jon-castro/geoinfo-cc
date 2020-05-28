@@ -2,6 +2,7 @@ import {
   SET_ADDRESS,
   SET_COORDINATES,
   SET_LOADING,
+  GET_CURRENT_WEATHER,
 } from "../types";
 
 export default (state, action) => {
@@ -15,6 +16,16 @@ export default (state, action) => {
       return {
         ...state,
         coordinates: action.payload,
+      };
+    case GET_CURRENT_WEATHER:
+      return {
+        ...state,
+        currentWeather: action.payload,
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;

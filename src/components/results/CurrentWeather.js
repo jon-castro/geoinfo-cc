@@ -1,23 +1,18 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
 
-const CurrentWeather = ({ city: { id, name, weather } }) => {
+const CurrentWeather = (weatherInfo) => {
   return (
     <Fragment>
       <div className="card">
-        <div className="card-header" key={id}>
-          {name}
+        <div className="card-header">
+          {weatherInfo[0].name}
         </div>
-        <div className="card-body">{weather[0].description}</div>
+        <div className="card-body">{weatherInfo[0].weather[0].description}</div>
       </div>
       <br />
       <br />
     </Fragment>
   );
-};
-
-CurrentWeather.propTypes = {
-  city: PropTypes.object.isRequired,
 };
 
 export default CurrentWeather;

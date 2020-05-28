@@ -8,13 +8,20 @@ import ResultsContext from "../../context/results/resultsContext";
 
 const Search = () => {
   const resultsContext = useContext(ResultsContext);
-  const { address, setAddress, coordinates, setCoordinates } = resultsContext;
+  const {
+    address,
+    setAddress,
+    coordinates,
+    setCoordinates,
+    getCurrentWeather,
+  } = resultsContext;
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
     setAddress(value);
-    setCoordinates(latLng);
+    setCoordinates(latLng)
+    await getCurrentWeather(37.8227046, -121.27661)
   };
 
   return (
