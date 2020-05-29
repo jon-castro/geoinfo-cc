@@ -5,6 +5,7 @@ import ResultsReducer from "./resultsReducer";
 import {
   SET_ADDRESS,
   SET_COORDINATES,
+  SET_DISPLAYABLE,
   SET_LOADING,
   GET_CURRENT_WEATHER,
 } from "../types";
@@ -18,6 +19,7 @@ const ResultsState = (props) => {
       lat: null,
       lng: null,
     },
+    displayable: false,
     loading: false,
     currentWeather: [],
   };
@@ -56,6 +58,9 @@ const ResultsState = (props) => {
 
   // Clear field (use in conjunction with a Search clear function?)
 
+  // Set displayable (user selected search location and coordinates are ready for use)
+  const setDisplayable = () => dispatch({ type: SET_DISPLAYABLE });
+
   // Set loading (component loading, separate from the search dropdown "Loading...")
   const setLoading = () => dispatch({ type: SET_LOADING });
 
@@ -64,10 +69,12 @@ const ResultsState = (props) => {
       value={{
         address: state.address,
         coordinates: state.coordinates,
+        displayable: state.displayable,
         loading: state.loading,
         currentWeather: state.currentWeather,
         setAddress,
         setCoordinates,
+        setDisplayable,
         setLoading,
         getCurrentWeather,
       }}

@@ -1,26 +1,31 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 
 import ResultsContext from "../../context/results/resultsContext";
 
 const Results = () => {
   const resultsContext = useContext(ResultsContext);
-  const { coordinates, address, currentWeather, getCurrentWeather, loading } = resultsContext;
+  const {
+    coordinates,
+    currentWeather,
+    getCurrentWeather,
+    loading,
+    displayable,
+    setDisplayable,
+  } = resultsContext;
+
+  const onChange = (displayable) => {
+    getCurrentWeather(coordinates.lat, coordinates.lng);
+  };
 
   return (
     <div>
-      {/* {state.currentWeather.map((city) => (
-        <div>
-          <CurrentWeather key={city.id} city={city} />
-        </div>
-      ))} */}
-      <div className="card">
-        <div className="card-header">
-          {coordinates && ((`Location: ${address}`))}
-        </div>
-        <div className="card-body">
-          {loading ? `Temp: ${currentWeather[0].weather[0].description}` : " "}
-        </div>
-      </div>
+      {displayable ? (
+        <p onChange={onChange(coordinates)}>
+          {currentWeather.name} - {}
+        </p>
+      ) : (
+        " "
+      )}
     </div>
   );
 };

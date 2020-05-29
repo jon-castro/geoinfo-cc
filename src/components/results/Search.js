@@ -13,15 +13,15 @@ const Search = () => {
     setAddress,
     coordinates,
     setCoordinates,
-    getCurrentWeather,
+    setDisplayable,
   } = resultsContext;
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
     setAddress(value);
-    setCoordinates(latLng)
-    await getCurrentWeather(37.8227046, -121.27661)
+    setCoordinates(latLng);
+    setDisplayable();
   };
 
   return (
