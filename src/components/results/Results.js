@@ -19,6 +19,8 @@ const Results = () => {
     }
   };
 
+  // Function to get necessary characters out. - stringify
+
   return (
     <div>
       {displayable ? (
