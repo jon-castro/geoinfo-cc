@@ -14,14 +14,19 @@ const Results = () => {
   } = resultsContext;
 
   const onChange = (displayable) => {
-    getCurrentWeather(coordinates.lat, coordinates.lng);
+    if (displayable) {
+      getCurrentWeather(coordinates.lat, coordinates.lng);
+    }
   };
 
   return (
     <div>
       {displayable ? (
-        <p onChange={onChange(coordinates)}>
-          {currentWeather.name} - {}
+        <p onChange={onChange(displayable)}>
+          {currentWeather.name} -
+          {
+            JSON.stringify(currentWeather.weather, ["description"])
+          }
         </p>
       ) : (
         " "
