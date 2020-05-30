@@ -14,6 +14,9 @@ const Search = () => {
     coordinates,
     setCoordinates,
     setDisplayable,
+    clearFields,
+    loading,
+    setLoading,
   } = resultsContext;
 
   const handleSelect = async (value) => {
@@ -21,6 +24,7 @@ const Search = () => {
     const latLng = await getLatLng(results[0]);
     setAddress(value);
     setCoordinates(latLng);
+    setLoading();
     setDisplayable();
   };
 

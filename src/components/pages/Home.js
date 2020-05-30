@@ -12,7 +12,6 @@ const Home = () => {
       </div>
       <br />
       <div className="container">
-        <Results />
       </div>
     </Fragment>
   );

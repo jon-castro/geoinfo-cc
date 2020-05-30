@@ -8,14 +8,20 @@ const Results = () => {
     coordinates,
     currentWeather,
     getCurrentWeather,
+    currentWeatherConditions,
+    getCurrentWeatherConditions,
     loading,
+    setLoading,
     displayable,
     setDisplayable,
+    clearFields,
   } = resultsContext;
 
-  const onChange = (displayable) => {
-    if (displayable) {
+  const onChange = (loading) => {
+    if (loading) {
       getCurrentWeather(coordinates.lat, coordinates.lng);
+      getCurrentWeatherConditions(coordinates.lat, coordinates.lng);
+      setLoading();
     }
   };
 
@@ -23,16 +29,13 @@ const Results = () => {
 
   return (
     <div>
-      {displayable ? (
-        <p onChange={onChange(displayable)}>
-          {currentWeather.name} -
-          {
-            JSON.stringify(currentWeather.weather, ["description"])
-          }
+      {/* {coordinates ? (
+        <p onChange={onChange(loading)}>
+          {currentWeather.name} - {currentWeatherConditions}
         </p>
       ) : (
         " "
-      )}
+      )} */}
     </div>
   );
 };

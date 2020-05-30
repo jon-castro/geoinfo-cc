@@ -4,6 +4,8 @@ import {
   SET_DISPLAYABLE,
   SET_LOADING,
   GET_CURRENT_WEATHER,
+  GET_CURRENT_WEATHER_CONDITIONS,
+  CLEAR_FIELDS,
 } from "../types";
 
 export default (state, action) => {
@@ -22,6 +24,20 @@ export default (state, action) => {
       return {
         ...state,
         currentWeather: action.payload,
+      };
+    case GET_CURRENT_WEATHER_CONDITIONS:
+      return {
+        ...state,
+        currentWeatherConditions: action.payload,
+        loading: false,
+      };
+    case CLEAR_FIELDS:
+      return {
+        ...state,
+        displayable: false,
+        loading: false,
+        currentWeather: [],
+        currentWeatherConditions: "",
       };
     case SET_DISPLAYABLE:
       return {

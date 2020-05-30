@@ -8,6 +8,8 @@ import {
   SET_DISPLAYABLE,
   SET_LOADING,
   GET_CURRENT_WEATHER,
+  GET_CURRENT_WEATHER_CONDITIONS,
+  CLEAR_FIELDS,
 } from "../types";
 
 let openWeatherMapApiKey = process.env.REACT_APP_API_KEY_OPEN_WEATHER_MAP;
@@ -22,6 +24,7 @@ const ResultsState = (props) => {
     displayable: false,
     loading: false,
     currentWeather: [],
+    currentWeatherConditions: "",
   };
 
   const [state, dispatch] = useReducer(ResultsReducer, initialState);
@@ -56,6 +59,22 @@ const ResultsState = (props) => {
     });
   };
 
+  // Get a string detailing the current weather conditions for the selected location:
+  const getCurrentWeatherConditions = async (lat, lng) => {
+    const res = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${openWeatherMapApiKey}`
+    );
+
+    let conditionsText = JSON.stringify(res.data.weather, ["description"]);
+    conditionsText = conditionsText.slice(17, -3);
+    conditionsText = conditionsText.toString();
+
+    dispatch({
+      type: GET_CURRENT_WEATHER_CONDITIONS,
+      payload: conditionsText,
+    });
+  };
+
   // Clear field (use in conjunction with a Search clear function?
 
   // Set displayable (user selected search location and coordinates are ready for use)
@@ -63,6 +82,9 @@ const ResultsState = (props) => {
 
   // Set loading (component loading, separate from the search dropdown "Loading...")
   const setLoading = () => dispatch({ type: SET_LOADING });
+
+  // Clear fields when performing a new search
+  const clearFields = () => dispatch({ type: CLEAR_FIELDS });
 
   return (
     <ResultsContext.Provider
@@ -72,11 +94,14 @@ const ResultsState = (props) => {
         displayable: state.displayable,
         loading: state.loading,
         currentWeather: state.currentWeather,
+        currentWeatherConditions: state.currentWeatherConditions,
         setAddress,
         setCoordinates,
         setDisplayable,
         setLoading,
         getCurrentWeather,
+        getCurrentWeatherConditions,
+        clearFields,
       }}
     >
       {props.children}
