@@ -19,7 +19,7 @@ const Results = () => {
     }
   };
 
-  // Function to get necessary characters out. - stringify
+  // Function with climate API here?
 
   return (
     <div>

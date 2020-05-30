@@ -56,7 +56,7 @@ const ResultsState = (props) => {
     });
   };
 
-  // Clear field (use in conjunction with a Search clear function?)
+  // Clear field (use in conjunction with a Search clear function?
 
   // Set displayable (user selected search location and coordinates are ready for use)
   const setDisplayable = () => dispatch({ type: SET_DISPLAYABLE });
