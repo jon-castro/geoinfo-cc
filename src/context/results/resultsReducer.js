@@ -29,7 +29,6 @@ export default (state, action) => {
       return {
         ...state,
         currentWeatherConditions: action.payload,
-        loading: false,
       };
     case SET_SEARCHABLE:
       return {

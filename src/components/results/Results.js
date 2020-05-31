@@ -2,28 +2,18 @@ import React, { useContext } from "react";
 
 import ResultsContext from "../../context/results/resultsContext";
 
+import CurrentWeather from "./CurrentWeather";
+
 const Results = () => {
   const resultsContext = useContext(ResultsContext);
   const {
-    coordinates,
-    currentWeather,
-    getCurrentWeather,
-    currentWeatherConditions,
-    getCurrentWeatherConditions,
-    loading,
-    setLoading,
+    searchable,
   } = resultsContext;
 
-  // const onChange = (loading) => {
-  //   if (loading) {
-  //     getCurrentWeather(coordinates.lat, coordinates.lng);
-  //     getCurrentWeatherConditions(coordinates.lat, coordinates.lng);
-  //   }
-  // };
-
   return (
-    <div>
-
+    <div className="card" hidden={searchable}>
+      <div className="card-header">Current Weather</div>
+      <div className="card-body"> Text here... <CurrentWeather /></div>
     </div>
   );
 };
