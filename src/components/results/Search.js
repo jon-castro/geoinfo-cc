@@ -13,10 +13,9 @@ const Search = () => {
     setAddress,
     coordinates,
     setCoordinates,
-    setDisplayable,
-    clearFields,
-    loading,
-    setLoading,
+    searchable,
+    setSearchable,
+    setUnsearchable,
   } = resultsContext;
 
   const handleSelect = async (value) => {
@@ -24,8 +23,7 @@ const Search = () => {
     const latLng = await getLatLng(results[0]);
     setAddress(value);
     setCoordinates(latLng);
-    setLoading();
-    setDisplayable();
+    setUnsearchable();
   };
 
   return (
@@ -37,7 +35,7 @@ const Search = () => {
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
-            <input {...getInputProps({ placeholder: "Type location" })} />
+            <input {...getInputProps({ placeholder: "Type location" })} disabled={!searchable} />
 
             <div>
               {loading ? <div>Loading...</div> : null}
@@ -59,6 +57,8 @@ const Search = () => {
               <br />
               <p>Latitude: {coordinates.lat}</p>
               <p>Longitude: {coordinates.lng}</p>
+              <br/>
+              <button className="btn btn-danger" onClick={setSearchable} hidden={searchable}>Clear search</button>
             </div>
           </div>
         )}

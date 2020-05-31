@@ -17,25 +17,16 @@ const Results = () => {
     clearFields,
   } = resultsContext;
 
-  const onChange = (loading) => {
-    if (loading) {
-      getCurrentWeather(coordinates.lat, coordinates.lng);
-      getCurrentWeatherConditions(coordinates.lat, coordinates.lng);
-      setLoading();
-    }
-  };
-
-  // Function with climate API here?
+  // const onChange = (loading) => {
+  //   if (loading) {
+  //     getCurrentWeather(coordinates.lat, coordinates.lng);
+  //     getCurrentWeatherConditions(coordinates.lat, coordinates.lng);
+  //   }
+  // };
 
   return (
     <div>
-      {/* {coordinates ? (
-        <p onChange={onChange(loading)}>
-          {currentWeather.name} - {currentWeatherConditions}
-        </p>
-      ) : (
-        " "
-      )} */}
+
     </div>
   );
 };

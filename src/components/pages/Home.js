@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import Search from "../results/Search";
-import Results from "../results/Results";
 
 const Home = () => {
   return (

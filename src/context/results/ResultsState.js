@@ -5,11 +5,12 @@ import ResultsReducer from "./resultsReducer";
 import {
   SET_ADDRESS,
   SET_COORDINATES,
-  SET_DISPLAYABLE,
+  SET_SEARCHABLE,
+  SET_UNSEARCHABLE,
   SET_LOADING,
   GET_CURRENT_WEATHER,
   GET_CURRENT_WEATHER_CONDITIONS,
-  CLEAR_FIELDS,
+  CLEAR_SEARCH,
 } from "../types";
 
 let openWeatherMapApiKey = process.env.REACT_APP_API_KEY_OPEN_WEATHER_MAP;
@@ -21,7 +22,7 @@ const ResultsState = (props) => {
       lat: null,
       lng: null,
     },
-    displayable: false,
+    searchable: true,
     loading: false,
     currentWeather: [],
     currentWeatherConditions: "",
@@ -77,31 +78,35 @@ const ResultsState = (props) => {
 
   // Clear field (use in conjunction with a Search clear function?
 
-  // Set displayable (user selected search location and coordinates are ready for use)
-  const setDisplayable = () => dispatch({ type: SET_DISPLAYABLE });
+  // Set the searchable flag to true (i.e. when clearing a search):
+  const setSearchable = () => dispatch({ type: SET_SEARCHABLE });
+
+  // Set the searchable flag to false (i.e. when a location has been selected and data is being displayed):
+  const setUnsearchable = () => dispatch({ type: SET_UNSEARCHABLE });
+
+  // Clear search fields to be able to perform a new search:
+  const clearSearch = () => dispatch({ type: CLEAR_SEARCH });
 
   // Set loading (component loading, separate from the search dropdown "Loading...")
   const setLoading = () => dispatch({ type: SET_LOADING });
-
-  // Clear fields when performing a new search
-  const clearFields = () => dispatch({ type: CLEAR_FIELDS });
 
   return (
     <ResultsContext.Provider
       value={{
         address: state.address,
         coordinates: state.coordinates,
-        displayable: state.displayable,
+        searchable: state.searchable,
         loading: state.loading,
         currentWeather: state.currentWeather,
         currentWeatherConditions: state.currentWeatherConditions,
         setAddress,
         setCoordinates,
-        setDisplayable,
+        setSearchable,
+        setUnsearchable,
         setLoading,
         getCurrentWeather,
         getCurrentWeatherConditions,
-        clearFields,
+        clearSearch,
       }}
     >
       {props.children}

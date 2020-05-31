@@ -1,11 +1,12 @@
 import {
   SET_ADDRESS,
   SET_COORDINATES,
-  SET_DISPLAYABLE,
+  SET_SEARCHABLE,
+  SET_UNSEARCHABLE,
   SET_LOADING,
   GET_CURRENT_WEATHER,
   GET_CURRENT_WEATHER_CONDITIONS,
-  CLEAR_FIELDS,
+  CLEAR_SEARCH,
 } from "../types";
 
 export default (state, action) => {
@@ -31,18 +32,28 @@ export default (state, action) => {
         currentWeatherConditions: action.payload,
         loading: false,
       };
-    case CLEAR_FIELDS:
+    case SET_SEARCHABLE:
+      return {
+        ...state,
+        searchable: true,
+        address: "",
+        coordinates: {
+          lat: null,
+          lng: null,
+        },
+      };
+    case SET_UNSEARCHABLE:
+      return {
+        ...state,
+        searchable: false,
+      };
+    case CLEAR_SEARCH:
       return {
         ...state,
         displayable: false,
         loading: false,
         currentWeather: [],
         currentWeatherConditions: "",
-      };
-    case SET_DISPLAYABLE:
-      return {
-        ...state,
-        displayable: true,
       };
     case SET_LOADING:
       return {
