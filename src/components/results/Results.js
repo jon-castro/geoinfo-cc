@@ -13,7 +13,7 @@ const Results = () => {
   return (
     <div className="card" hidden={searchable}>
       <div className="card-header">Current Weather</div>
-      <div className="card-body"> Text here... <CurrentWeather /></div>
+      <div className="card-body"><CurrentWeather /></div>
     </div>
   );
 };
