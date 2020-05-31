@@ -3,10 +3,9 @@ import {
   SET_COORDINATES,
   SET_SEARCHABLE,
   SET_UNSEARCHABLE,
-  SET_LOADING,
   GET_CURRENT_WEATHER,
   GET_CURRENT_WEATHER_CONDITIONS,
-  CLEAR_SEARCH,
+  SET_LOADING,
 } from "../types";
 
 export default (state, action) => {
@@ -46,14 +45,6 @@ export default (state, action) => {
       return {
         ...state,
         searchable: false,
-      };
-    case CLEAR_SEARCH:
-      return {
-        ...state,
-        displayable: false,
-        loading: false,
-        currentWeather: [],
-        currentWeatherConditions: "",
       };
     case SET_LOADING:
       return {

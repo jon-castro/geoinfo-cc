@@ -12,9 +12,6 @@ const Results = () => {
     getCurrentWeatherConditions,
     loading,
     setLoading,
-    displayable,
-    setDisplayable,
-    clearFields,
   } = resultsContext;
 
   // const onChange = (loading) => {

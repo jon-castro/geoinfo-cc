@@ -10,7 +10,6 @@ import {
   SET_LOADING,
   GET_CURRENT_WEATHER,
   GET_CURRENT_WEATHER_CONDITIONS,
-  CLEAR_SEARCH,
 } from "../types";
 
 let openWeatherMapApiKey = process.env.REACT_APP_API_KEY_OPEN_WEATHER_MAP;
@@ -76,16 +75,11 @@ const ResultsState = (props) => {
     });
   };
 
-  // Clear field (use in conjunction with a Search clear function?
-
   // Set the searchable flag to true (i.e. when clearing a search):
   const setSearchable = () => dispatch({ type: SET_SEARCHABLE });
 
   // Set the searchable flag to false (i.e. when a location has been selected and data is being displayed):
   const setUnsearchable = () => dispatch({ type: SET_UNSEARCHABLE });
-
-  // Clear search fields to be able to perform a new search:
-  const clearSearch = () => dispatch({ type: CLEAR_SEARCH });
 
   // Set loading (component loading, separate from the search dropdown "Loading...")
   const setLoading = () => dispatch({ type: SET_LOADING });
@@ -106,7 +100,6 @@ const ResultsState = (props) => {
         setLoading,
         getCurrentWeather,
         getCurrentWeatherConditions,
-        clearSearch,
       }}
     >
       {props.children}
