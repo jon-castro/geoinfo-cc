@@ -1,17 +1,17 @@
-import React, { Fragment, useContext } from "react";
+import React, { useContext } from "react";
 
 import ResultsContext from "../../context/results/resultsContext";
-import Spinner from "../layout/Spinner";
 
 const CurrentWeather = () => {
   const resultsContext = useContext(ResultsContext);
   const {
     searchable,
     coordinates,
-    currentWeather,
     getCurrentWeather,
     getCurrentWeatherConditions,
     currentWeatherConditions,
+    getCurrentWeatherDescription,
+    currentWeatherDescription,
   } = resultsContext;
 
   const onChange = (conditions) => {
@@ -22,10 +22,18 @@ const CurrentWeather = () => {
 
   return (
     <div onChange={onChange(searchable)}>
-      <p>{currentWeather.name}</p>
-      <p onLoad={getCurrentWeatherConditions(coordinates.lat, coordinates.lng)}>
+      <b>Conditions:</b>{" "}
+      <span
+        onLoad={getCurrentWeatherConditions(coordinates.lat, coordinates.lng)}
+      >
         {currentWeatherConditions}
-      </p>
+      </span>{" "}
+      -{" "}
+      <span
+        onLoad={getCurrentWeatherDescription(coordinates.lat, coordinates.lng)}
+      >
+        {currentWeatherDescription}
+      </span>
     </div>
   );
 };

@@ -10,6 +10,7 @@ import {
   SET_LOADING,
   GET_CURRENT_WEATHER,
   GET_CURRENT_WEATHER_CONDITIONS,
+  GET_CURRENT_WEATHER_DESCRIPTION,
 } from "../types";
 
 let openWeatherMapApiKey = process.env.REACT_APP_API_KEY_OPEN_WEATHER_MAP;
@@ -25,6 +26,7 @@ const ResultsState = (props) => {
     loading: false,
     currentWeather: [],
     currentWeatherConditions: "",
+    currentWeatherDescription: "",
   };
 
   const [state, dispatch] = useReducer(ResultsReducer, initialState);
@@ -65,12 +67,26 @@ const ResultsState = (props) => {
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${openWeatherMapApiKey}`
     );
 
-    let conditionsText = JSON.stringify(res.data.weather, ["description"]);
-    conditionsText = conditionsText.slice(17, -3);
-    conditionsText = conditionsText.toString();
+    let conditionsText = JSON.stringify(res.data.weather, ["main"]);
+    conditionsText = conditionsText.slice(10, -3);
 
     dispatch({
       type: GET_CURRENT_WEATHER_CONDITIONS,
+      payload: conditionsText,
+    });
+  };
+
+  // Get a string detailing the current weather conditions description for the selected location:
+  const getCurrentWeatherDescription = async (lat, lng) => {
+    const res = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${openWeatherMapApiKey}`
+    );
+
+    let conditionsText = JSON.stringify(res.data.weather, ["description"]);
+    conditionsText = conditionsText.slice(17, -3);
+
+    dispatch({
+      type: GET_CURRENT_WEATHER_DESCRIPTION,
       payload: conditionsText,
     });
   };
@@ -93,6 +109,7 @@ const ResultsState = (props) => {
         loading: state.loading,
         currentWeather: state.currentWeather,
         currentWeatherConditions: state.currentWeatherConditions,
+        currentWeatherDescription: state.currentWeatherDescription,
         setAddress,
         setCoordinates,
         setSearchable,
@@ -100,6 +117,7 @@ const ResultsState = (props) => {
         setLoading,
         getCurrentWeather,
         getCurrentWeatherConditions,
+        getCurrentWeatherDescription,
       }}
     >
       {props.children}

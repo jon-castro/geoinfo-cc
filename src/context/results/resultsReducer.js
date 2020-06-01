@@ -5,6 +5,7 @@ import {
   SET_UNSEARCHABLE,
   GET_CURRENT_WEATHER,
   GET_CURRENT_WEATHER_CONDITIONS,
+  GET_CURRENT_WEATHER_DESCRIPTION,
   SET_LOADING,
 } from "../types";
 
@@ -29,6 +30,11 @@ export default (state, action) => {
       return {
         ...state,
         currentWeatherConditions: action.payload,
+      };
+    case GET_CURRENT_WEATHER_DESCRIPTION:
+      return {
+        ...state,
+        currentWeatherDescription: action.payload,
       };
     case SET_SEARCHABLE:
       return {
