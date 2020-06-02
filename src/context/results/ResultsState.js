@@ -11,6 +11,7 @@ import {
   GET_CURRENT_WEATHER,
   GET_CURRENT_WEATHER_CONDITIONS,
   GET_CURRENT_WEATHER_DESCRIPTION,
+  GET_CURRENT_TEMPERATURE,
 } from "../types";
 
 let openWeatherMapApiKey = process.env.REACT_APP_API_KEY_OPEN_WEATHER_MAP;
@@ -27,6 +28,7 @@ const ResultsState = (props) => {
     currentWeather: [],
     currentWeatherConditions: "",
     currentWeatherDescription: "",
+    currentTemperature: "",
   };
 
   const [state, dispatch] = useReducer(ResultsReducer, initialState);
@@ -91,6 +93,19 @@ const ResultsState = (props) => {
     });
   };
 
+  // Get the current temperature in K, convert to F and convert to a string:
+  const getCurrentTemperature = async (lat, lng) => {
+    const res = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${openWeatherMapApiKey}`
+    );
+
+    let temperatureInK = res.data.main;
+    temperatureInK = temperatureInK.temp;
+    console.log(temperatureInK);
+  }
+
+  // Get the current humidity % as a string:
+
   // Set the searchable flag to true (i.e. when clearing a search):
   const setSearchable = () => dispatch({ type: SET_SEARCHABLE });
 
@@ -110,6 +125,7 @@ const ResultsState = (props) => {
         currentWeather: state.currentWeather,
         currentWeatherConditions: state.currentWeatherConditions,
         currentWeatherDescription: state.currentWeatherDescription,
+        currentTemperature: state.currentTemperature,
         setAddress,
         setCoordinates,
         setSearchable,
@@ -118,6 +134,7 @@ const ResultsState = (props) => {
         getCurrentWeather,
         getCurrentWeatherConditions,
         getCurrentWeatherDescription,
+        getCurrentTemperature,
       }}
     >
       {props.children}

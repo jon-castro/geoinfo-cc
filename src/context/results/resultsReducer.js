@@ -6,6 +6,7 @@ import {
   GET_CURRENT_WEATHER,
   GET_CURRENT_WEATHER_CONDITIONS,
   GET_CURRENT_WEATHER_DESCRIPTION,
+  GET_CURRENT_TEMPERATURE,
   SET_LOADING,
 } from "../types";
 
@@ -35,6 +36,11 @@ export default (state, action) => {
       return {
         ...state,
         currentWeatherDescription: action.payload,
+      };
+    case GET_CURRENT_TEMPERATURE:
+      return {
+        ...state,
+        currentTemperature: action.payload,
       };
     case SET_SEARCHABLE:
       return {
