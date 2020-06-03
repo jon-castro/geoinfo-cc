@@ -3,11 +3,11 @@ import {
   SET_COORDINATES,
   SET_SEARCHABLE,
   SET_UNSEARCHABLE,
+  SET_RESULTS_DISPLAYED,
   GET_CURRENT_WEATHER,
   GET_CURRENT_WEATHER_CONDITIONS,
   GET_CURRENT_WEATHER_DESCRIPTION,
   GET_CURRENT_TEMPERATURE,
-  SET_LOADING,
 } from "../types";
 
 export default (state, action) => {
@@ -46,21 +46,25 @@ export default (state, action) => {
       return {
         ...state,
         searchable: true,
+        resultsDisplayed: false,
         address: "",
         coordinates: {
           lat: null,
           lng: null,
         },
+        currentWeather: [],
+        currentWeatherConditions: "",
+        currentWeatherDescription: "",
       };
     case SET_UNSEARCHABLE:
       return {
         ...state,
         searchable: false,
       };
-    case SET_LOADING:
+    case SET_RESULTS_DISPLAYED:
       return {
         ...state,
-        loading: true,
+        resultsDisplayed: true,
       };
     default:
       return state;

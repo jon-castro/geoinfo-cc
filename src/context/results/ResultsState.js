@@ -7,7 +7,7 @@ import {
   SET_COORDINATES,
   SET_SEARCHABLE,
   SET_UNSEARCHABLE,
-  SET_LOADING,
+  SET_RESULTS_DISPLAYED,
   GET_CURRENT_WEATHER,
   GET_CURRENT_WEATHER_CONDITIONS,
   GET_CURRENT_WEATHER_DESCRIPTION,
@@ -24,7 +24,7 @@ const ResultsState = (props) => {
       lng: null,
     },
     searchable: true,
-    loading: false,
+    resultsDisplayed: false,
     currentWeather: [],
     currentWeatherConditions: "",
     currentWeatherDescription: "",
@@ -69,8 +69,8 @@ const ResultsState = (props) => {
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${openWeatherMapApiKey}`
     );
 
-    let conditionsText = JSON.stringify(res.data.weather, ["main"]);
-    conditionsText = conditionsText.slice(10, -3);
+    let conditionsText = JSON.stringify(res.data.weather[0], ["main"]);
+    conditionsText = conditionsText.slice(9, -2);
 
     dispatch({
       type: GET_CURRENT_WEATHER_CONDITIONS,
@@ -84,8 +84,8 @@ const ResultsState = (props) => {
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${openWeatherMapApiKey}`
     );
 
-    let conditionsText = JSON.stringify(res.data.weather, ["description"]);
-    conditionsText = conditionsText.slice(17, -3);
+    let conditionsText = JSON.stringify(res.data.weather[0], ["description"]);
+    conditionsText = conditionsText.slice(16, -2);
 
     dispatch({
       type: GET_CURRENT_WEATHER_DESCRIPTION,
@@ -112,8 +112,8 @@ const ResultsState = (props) => {
   // Set the searchable flag to false (i.e. when a location has been selected and data is being displayed):
   const setUnsearchable = () => dispatch({ type: SET_UNSEARCHABLE });
 
-  // Set loading (component loading, separate from the search dropdown "Loading...")
-  const setLoading = () => dispatch({ type: SET_LOADING });
+  // Set displayed flag to fetch and display results items:
+  const setResultsDisplayed = () => dispatch({ type: SET_RESULTS_DISPLAYED });
 
   return (
     <ResultsContext.Provider
@@ -121,7 +121,7 @@ const ResultsState = (props) => {
         address: state.address,
         coordinates: state.coordinates,
         searchable: state.searchable,
-        loading: state.loading,
+        resultsDisplayed: state.resultsDisplayed,
         currentWeather: state.currentWeather,
         currentWeatherConditions: state.currentWeatherConditions,
         currentWeatherDescription: state.currentWeatherDescription,
@@ -130,7 +130,7 @@ const ResultsState = (props) => {
         setCoordinates,
         setSearchable,
         setUnsearchable,
-        setLoading,
+        setResultsDisplayed,
         getCurrentWeather,
         getCurrentWeatherConditions,
         getCurrentWeatherDescription,
