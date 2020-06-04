@@ -12,6 +12,7 @@ import {
   GET_CURRENT_WEATHER_CONDITIONS,
   GET_CURRENT_WEATHER_DESCRIPTION,
   GET_CURRENT_TEMPERATURE,
+  GET_CURRENT_HUMIDITY,
 } from "../types";
 
 let openWeatherMapApiKey = process.env.REACT_APP_API_KEY_OPEN_WEATHER_MAP;
@@ -29,6 +30,7 @@ const ResultsState = (props) => {
     currentWeatherConditions: "",
     currentWeatherDescription: "",
     currentTemperature: "",
+    currentHumidity: "",
   };
 
   const [state, dispatch] = useReducer(ResultsReducer, initialState);
@@ -99,12 +101,29 @@ const ResultsState = (props) => {
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${openWeatherMapApiKey}`
     );
 
-    let temperatureInK = res.data.main;
-    temperatureInK = temperatureInK.temp;
-    console.log(temperatureInK);
-  }
+    let temperature = res.data.main.temp;
+    temperature = temperature * 1.8 - 459.67;
+    temperature = temperature.toFixed(2);
 
-  // Get the current humidity % as a string:
+    dispatch({
+      type: GET_CURRENT_TEMPERATURE,
+      payload: temperature,
+    });
+  };
+
+  // Get the current humidity %
+  const getCurrentHumidity = async (lat, lng) => {
+    const res = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${openWeatherMapApiKey}`
+    );
+
+    let humidity = res.data.main.humidity;
+
+    dispatch({
+      type: GET_CURRENT_HUMIDITY,
+      payload: humidity,
+    });
+  };
 
   // Set the searchable flag to true (i.e. when clearing a search):
   const setSearchable = () => dispatch({ type: SET_SEARCHABLE });
@@ -126,6 +145,7 @@ const ResultsState = (props) => {
         currentWeatherConditions: state.currentWeatherConditions,
         currentWeatherDescription: state.currentWeatherDescription,
         currentTemperature: state.currentTemperature,
+        currentHumidity: state.currentHumidity,
         setAddress,
         setCoordinates,
         setSearchable,
@@ -135,6 +155,7 @@ const ResultsState = (props) => {
         getCurrentWeatherConditions,
         getCurrentWeatherDescription,
         getCurrentTemperature,
+        getCurrentHumidity,
       }}
     >
       {props.children}

@@ -5,21 +5,20 @@ import ResultsContext from "../../context/results/resultsContext";
 const CurrentWeather = () => {
   const resultsContext = useContext(ResultsContext);
   const {
-    resultsDisplayed,
-    currentWeather,
     currentWeatherConditions,
     currentWeatherDescription,
-    getCurrentTemperature,
     currentTemperature,
+    currentHumidity,
   } = resultsContext;
 
   return (
     <Fragment>
       <div>
-        <b>Conditions:</b> <span>{currentWeatherConditions}</span> -{" "}
-        <span>{currentWeatherDescription}</span>
+        <p><strong>Conditions: </strong> <span>{currentWeatherConditions}</span> -{" "}
+        <span>{currentWeatherDescription}</span></p>
+        <p><strong>Temperature: </strong>{currentTemperature}<span>&#8457;</span></p>
+        <p><strong>Humidity: </strong>{currentHumidity}%</p>
       </div>
-      <br />
     </Fragment>
   );
 };

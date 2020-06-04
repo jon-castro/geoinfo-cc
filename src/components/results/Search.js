@@ -11,7 +11,6 @@ const Search = () => {
   const {
     address,
     setAddress,
-    coordinates,
     setCoordinates,
     searchable,
     setSearchable,
@@ -26,8 +25,6 @@ const Search = () => {
     setUnsearchable();
   };
 
-
-
   return (
     <Fragment>
       <PlacesAutocomplete
@@ -41,6 +38,13 @@ const Search = () => {
               {...getInputProps({ placeholder: "Type location" })}
               disabled={!searchable}
             />
+            <button
+              className="btn btn-danger ml-3"
+              onClick={setSearchable}
+              hidden={searchable}
+            >
+              Clear search
+            </button>
 
             <div>
               {loading ? <div>Loading...</div> : null}
@@ -59,17 +63,6 @@ const Search = () => {
                   </div>
                 );
               })}
-              <br />
-              <p>Latitude: {coordinates.lat}</p>
-              <p>Longitude: {coordinates.lng}</p>
-              <br />
-              <button
-                className="btn btn-danger"
-                onClick={setSearchable}
-                hidden={searchable}
-              >
-                Clear search
-              </button>
             </div>
           </div>
         )}

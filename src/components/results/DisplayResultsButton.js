@@ -7,17 +7,20 @@ const DisplayResults = () => {
   const {
     searchable,
     coordinates,
-    resultsDisplayed,
     setResultsDisplayed,
     getCurrentWeather,
     getCurrentWeatherDescription,
     getCurrentWeatherConditions,
+    getCurrentTemperature,
+    getCurrentHumidity,
   } = resultsContext;
 
   const onClick = () => {
     getCurrentWeather(coordinates.lat, coordinates.lng);
     getCurrentWeatherConditions(coordinates.lat, coordinates.lng);
     getCurrentWeatherDescription(coordinates.lat, coordinates.lng);
+    getCurrentTemperature(coordinates.lat, coordinates.lng);
+    getCurrentHumidity(coordinates.lat, coordinates.lng);
     setResultsDisplayed();
   };
 
