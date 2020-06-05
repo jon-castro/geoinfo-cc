@@ -3,6 +3,7 @@ import React, { Fragment, useContext } from "react";
 import ResultsContext from "../../context/results/resultsContext";
 
 import CurrentWeather from "./CurrentWeather";
+import LocationInfo from "./LocationInfo";
 
 const Results = () => {
   const resultsContext = useContext(ResultsContext);
@@ -34,6 +35,16 @@ const Results = () => {
           </div>
           <div className="card-body">
             <CurrentWeather />
+          </div>
+        </div>
+      ) : null}
+      {resultsDisplayed ? (
+        <div className="card mb-3" hidden={searchable}>
+          <div className="card-header text-center">
+            <strong>Location Information</strong>
+          </div>
+          <div className="card-body">
+            <LocationInfo />
           </div>
         </div>
       ) : null}

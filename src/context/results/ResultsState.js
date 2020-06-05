@@ -13,9 +13,11 @@ import {
   GET_CURRENT_WEATHER_DESCRIPTION,
   GET_CURRENT_TEMPERATURE,
   GET_CURRENT_HUMIDITY,
+  GET_LOCATION_INFO,
 } from "../types";
 
 let openWeatherMapApiKey = process.env.REACT_APP_API_KEY_OPEN_WEATHER_MAP;
+let openTripMapApiKey = process.env.REACT_APP_API_KEY_OPEN_TRIP_MAP;
 
 const ResultsState = (props) => {
   const initialState = {
@@ -31,6 +33,7 @@ const ResultsState = (props) => {
     currentWeatherDescription: "",
     currentTemperature: "",
     currentHumidity: "",
+    locationInfo: [],
   };
 
   const [state, dispatch] = useReducer(ResultsReducer, initialState);
@@ -125,6 +128,21 @@ const ResultsState = (props) => {
     });
   };
 
+  // Get location info from OpenTripMap into an object
+  const getLocationInfo = async (lat, lng, locationKind) => {
+    const res = await axios.get(
+      `http://api.opentripmap.com/0.1/en/places/radius?lon=${lng}&lat=${lat}&radius=25000&kinds=${locationKind}&format=geojson&apikey=${openTripMapApiKey}`
+    );
+
+    let locationData = res.data.features;
+    // console.log(locationData);
+
+    dispatch({
+      type: GET_LOCATION_INFO,
+      payload: locationData,
+    });
+  };
+
   // Set the searchable flag to true (i.e. when clearing a search):
   const setSearchable = () => dispatch({ type: SET_SEARCHABLE });
 
@@ -146,6 +164,7 @@ const ResultsState = (props) => {
         currentWeatherDescription: state.currentWeatherDescription,
         currentTemperature: state.currentTemperature,
         currentHumidity: state.currentHumidity,
+        locationInfo: state.locationInfo,
         setAddress,
         setCoordinates,
         setSearchable,
@@ -156,6 +175,7 @@ const ResultsState = (props) => {
         getCurrentWeatherDescription,
         getCurrentTemperature,
         getCurrentHumidity,
+        getLocationInfo,
       }}
     >
       {props.children}
