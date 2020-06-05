@@ -13,13 +13,23 @@ const LocationInfo = () => {
     <Fragment>
       <div>
         <div>
-          {locationInfo.map((location) => {
-            return (
-              <Accordion key={location.id} title={location.properties.name}>
-                <p><strong>Kind: </strong>{location.properties.kinds}</p>
-              </Accordion>
-            );
-          })}
+          {locationInfo
+            .filter((location) => {
+              if (location.properties.name === "") {
+                return false;
+              }
+              return true;
+            })
+            .map((location) => {
+              return (
+                <Accordion key={location.id} title={location.properties.name}>
+                  <p>
+                    <strong>Kind: </strong>
+                    {location.properties.kinds}
+                  </p>
+                </Accordion>
+              );
+            })}
         </div>
       </div>
     </Fragment>

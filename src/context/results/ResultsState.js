@@ -135,7 +135,6 @@ const ResultsState = (props) => {
     );
 
     let locationData = res.data.features;
-    // console.log(locationData);
 
     dispatch({
       type: GET_LOCATION_INFO,
