@@ -23,6 +23,7 @@ const DisplayResults = () => {
     getCurrentTemperature(coordinates.lat, coordinates.lng);
     getCurrentHumidity(coordinates.lat, coordinates.lng);
     getLocationInfo(coordinates.lat, coordinates.lng, "sport");
+    getLocationInfo(coordinates.lat, coordinates.lng, "tourist_facilities");
     setResultsDisplayed();
   };
 
