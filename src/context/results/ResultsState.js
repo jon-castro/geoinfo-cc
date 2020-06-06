@@ -135,6 +135,12 @@ const ResultsState = (props) => {
     );
 
     let locationData = res.data.features;
+    locationData = locationData.filter((location) => {
+      if (location.properties.name === "") {
+        return false;
+      }
+      return true;
+    });
 
     dispatch({
       type: GET_LOCATION_INFO,
