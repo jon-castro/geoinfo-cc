@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext } from "react";
 import Accordion from "react-collapsy";
 
 import ResultsContext from "../../context/results/resultsContext";
@@ -9,8 +9,6 @@ const LocationInfo = () => {
   const resultsContext = useContext(ResultsContext);
   const { locationInfo } = resultsContext;
   const list = [];
-
-  const [count, setCount] = useState(0);
 
   const locationAccordionList = (locationInfo, list) => {
     locationInfo
@@ -23,53 +21,38 @@ const LocationInfo = () => {
       .map((location) => {
         return list.push(
           <Accordion key={location.id} title={location.properties.name}>
-            <p>
+            <div>
+              <strong>Coordinates: </strong>
+              <p>Latitude: {location.geometry.coordinates[1].toFixed(2)}</p>
+              <p>Longitude: {location.geometry.coordinates[0].toFixed(2)}</p>
+            </div>
+            <br/>
+            <div>
               <strong>Kind: </strong>
               {location.properties.kinds}
-            </p>
+            </div>
           </Accordion>
         );
       });
-    console.log(list);
   };
 
-  const showLocs = (count) => {
-    // let a;
-    // for (let count; count < count + 10; setCount(count++)) {
-    //   a = list[count];
-    // }
-    // return a;
-    return list[count]
-  };
-
-  const showMore = (count) => {
-    showLocs(count);
+  const showLocs = () => {
+    let count = 0;
+    const listing = [];
+    let currentCount = count;
+    while (count !== currentCount + 5) {
+      count = count + 1;
+      listing.push(list[count]);
+    }
+    return listing;
   };
 
   return (
     <Fragment>
       <div>
         <div>
-          {/* {locationInfo
-            .filter((location) => {
-              if (location.properties.name === "") {
-                return false;
-              }
-              return true;
-            })
-            .map((location) => {
-              return (
-                <Accordion key={location.id} title={location.properties.name}>
-                  <p>
-                    <strong>Kind: </strong>
-                    {location.properties.kinds}
-                  </p>
-                </Accordion>
-              );
-            })} */}
           {locationAccordionList(locationInfo, list)}
-          {showLocs(count)}
-          <button onClick={showMore(count)}>Show More</button>
+          {showLocs()}
         </div>
       </div>
     </Fragment>

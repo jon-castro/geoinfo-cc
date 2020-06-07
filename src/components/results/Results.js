@@ -41,7 +41,7 @@ const Results = () => {
       {resultsDisplayed ? (
         <div className="card mb-3" hidden={searchable}>
           <div className="card-header text-center">
-            <strong>Location Information</strong>
+            <strong>Interesting Locations</strong>
           </div>
           <div className="card-body">
             <LocationInfo />
