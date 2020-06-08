@@ -131,7 +131,7 @@ const ResultsState = (props) => {
   // Get location info from OpenTripMap into an object
   const getLocationInfo = async (lat, lng, locationKind) => {
     const res = await axios.get(
-      `http://api.opentripmap.com/0.1/en/places/radius?lon=${lng}&lat=${lat}&radius=25000&kinds=${locationKind}&format=geojson&apikey=${openTripMapApiKey}`
+      `https://api.opentripmap.com/0.1/en/places/radius?lon=${lng}&lat=${lat}&radius=25000&kinds=${locationKind}&format=geojson&apikey=${openTripMapApiKey}`
     );
 
     let locationData = res.data.features;
