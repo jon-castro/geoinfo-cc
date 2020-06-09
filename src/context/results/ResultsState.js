@@ -156,9 +156,12 @@ const ResultsState = (props) => {
       `https://api.foursquare.com/v2/venues/search?ll=${lat},${lng}&client_id=${foursquareApiKey}&client_secret=${foursquareApiSecret}&limit=${limit}&v=20200101`
     );
 
+    let venues = res.data.response.venues;
+    console.log(venues);
+
     dispatch({
       type: GET_LOCATION_INFO,
-      payload: res.data,
+      payload: venues,
     });
   };
 

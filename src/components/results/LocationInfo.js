@@ -8,7 +8,7 @@ require("../../../node_modules/react-collapsy/lib/index.css");
 const LocationInfo = () => {
   const resultsContext = useContext(ResultsContext);
   const { locationInfo } = resultsContext;
-  // const list = [];
+  const locationsList = [];
 
   // const locationAccordionList = (locationInfo, list) => {
   //   locationInfo
@@ -47,11 +47,34 @@ const LocationInfo = () => {
   //   return listing;
   // };
 
+  const locationAccordionList = (locationInfo, locationsList) => {
+    if (locationInfo) {
+      locationInfo.map((location) => {
+        return locationsList.push(
+          <Accordion key={location.id} title={location.name}>
+            <div>
+              <strong>Type: </strong>
+              {/* <p>{location.categories[0].name}</p> */}
+            </div>
+            <br />
+            {/* <div>
+              <strong>Address: </strong>
+              <p>{location.formattedAddress[0]}</p>
+              <p>{location.formattedAddress[1]}</p>
+              <p>{location.formattedAddress[2]}</p>
+            </div> */}
+          </Accordion>
+        );
+      });
+    }
+  };
+
   return (
     <Fragment>
       <div>
         <div>
-          {locationInfo}
+          {/* {locationAccordionList(locationInfo, locationsList)} */}
+          {/* {locationsList} */}
           {/* {locationAccordionList(locationInfo, list)}
           {showLocs()} */}
         </div>
