@@ -17,7 +17,6 @@ import {
 } from "../types";
 
 let openWeatherMapApiKey = process.env.REACT_APP_API_KEY_OPEN_WEATHER_MAP;
-let openTripMapApiKey = process.env.REACT_APP_API_KEY_OPEN_TRIP_MAP;
 let foursquareApiKey = process.env.REACT_APP_FOURSQUARE_API_KEY;
 let foursquareApiSecret = process.env.REACT_APP_FOURSQUARE_API_SECRET;
 
@@ -130,27 +129,7 @@ const ResultsState = (props) => {
     });
   };
 
-  // Get location info from OpenTripMap into an object - ORIGINAL OpenTripMap API Call
-  // const getLocationInfo = async (lat, lng, locationKind) => {
-  //   const res = await axios.get(
-  //     `https://api.opentripmap.com/0.1/en/places/radius?lon=${lng}&lat=${lat}&radius=25000&kinds=${locationKind}&format=geojson&apikey=${openTripMapApiKey}`
-  //   );
-
-  //   let locationData = res.data.features;
-  //   locationData = locationData.filter((location) => {
-  //     if (location.properties.name === "") {
-  //       return false;
-  //     }
-  //     return true;
-  //   });
-
-  //   dispatch({
-  //     type: GET_LOCATION_INFO,
-  //     payload: locationData,
-  //   });
-  // };
-
-  // Get location info from ??? test endpoint
+  // Get location info from Foursquare
   const getLocationInfo = async (lat, lng, limit = 5) => {
     const res = await axios.get(
       `https://api.foursquare.com/v2/venues/search?ll=${lat},${lng}&client_id=${foursquareApiKey}&client_secret=${foursquareApiSecret}&limit=${limit}&v=20200101`
